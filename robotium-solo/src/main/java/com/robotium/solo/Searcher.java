@@ -73,11 +73,11 @@ class Searcher {
 		TextView foundAnyMatchingView = null;
 
 		while (SystemClock.uptimeMillis() < endTime) {
-			sleeper.sleep();
 			foundAnyMatchingView = searchFor(viewClass, regex, expectedMinimumNumberOfMatches, 0, scroll, onlyVisible);
 			if (foundAnyMatchingView !=null){
 				return true;
 			}
+			sleeper.sleep();
 		}
 		return false;
 	}
@@ -107,8 +107,6 @@ class Searcher {
 		final Callable<Collection<T>> viewFetcherCallback = new Callable<Collection<T>>() {
 			@SuppressWarnings("unchecked")
 			public Collection<T> call() throws Exception {
-				sleeper.sleep();
-	
 				ArrayList<T> viewsToReturn = viewFetcher.getCurrentViews(viewClass);
 
 				if(onlyVisible){

@@ -378,7 +378,6 @@ class Waiter {
 		}
 	}
 
-
 	/**
 	 * Waits for a condition to be satisfied.
 	 * 
@@ -389,18 +388,14 @@ class Waiter {
 	public boolean waitForCondition(Condition condition, int timeout){
 		final long endTime = SystemClock.uptimeMillis() + timeout;
 
-		while (true) {
-			final boolean timedOut = SystemClock.uptimeMillis() > endTime;
-			if (timedOut){
-				return false;
-			}
-
-			sleeper.sleep();
-
+		while(SystemClock.uptimeMillis() < endTime){
 			if (condition.isSatisfied()){
 				return true;
 			}
+
+			sleeper.sleep(MINISLEEP);
 		}
+		return condition.isSatisfied();
 	}
 
 	/**
@@ -495,8 +490,6 @@ class Waiter {
 				return null;
 			}
 
-			sleeper.sleep();
-
 			if(!hardStoppage)
 				timeout = 0;
 
@@ -505,6 +498,9 @@ class Waiter {
 			if (textViewToReturn != null ){
 				return textViewToReturn;
 			}
+
+			sleeper.sleep(MINISLEEP);
+
 		}
 	}
 

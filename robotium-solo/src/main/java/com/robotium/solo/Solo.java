@@ -488,6 +488,17 @@ public class Solo {
 	 * Waits for a condition to be satisfied.
 	 * 
 	 * @param condition the condition to wait for
+	 * @return {@code true} if condition is satisfied and {@code false} if it is not satisfied before the timeout
+	 */
+
+	public boolean waitForCondition(Condition condition){
+		return waiter.waitForCondition(condition, Timeout.getLargeTimeout());
+	}
+
+	/**
+	 * Waits for a condition to be satisfied.
+	 * 
+	 * @param condition the condition to wait for
 	 * @param timeout the amount of time in milliseconds to wait
 	 * @return {@code true} if condition is satisfied and {@code false} if it is not satisfied before the timeout
 	 */
